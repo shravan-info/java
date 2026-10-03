@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#faf9f5">
+<title>15-Day Core Java Challenge</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✻</text></svg>">
+<style>
+:root{--bg:#faf9f5;--sf:#fff;--sub:#f3f1ea;--ln:#e6e3d8;--tx:#1f1e1d;--mut:#76746b;--ac:#d97757;--ad:#c6613f;--ok:#3f6b3f}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--tx);min-height:100dvh;line-height:1.55}
+h1,h2,h3,.stat b{font-family:ui-serif,Georgia,"Times New Roman",serif;font-weight:500}
+button{font:inherit;color:inherit;cursor:pointer}
+.hide{display:none!important}
+.wrap{max-width:760px;margin:0 auto;padding:max(16px,env(safe-area-inset-top)) 18px 56px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.brand{font:500 19px ui-serif,Georgia,serif;display:flex;align-items:center;gap:8px}
+.spark{color:var(--ac);font-size:24px}
+.btn{background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:8px 14px;font-size:14px}
+.btn:hover{background:var(--sub)}
+h1{font-size:clamp(28px,6vw,38px);line-height:1.2}
+.sm{font-size:13px;color:var(--mut)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0 14px}
+.stat{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:14px}
+.stat b{display:block;font-size:26px;line-height:1.2}.stat span{font-size:12px;color:var(--mut)}
+.bar{height:6px;background:var(--sub);border-radius:6px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;width:0;background:var(--ac);transition:width .5s}
+.bd{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:18px}
+.bg{flex:none;border:1px solid var(--ln);border-radius:20px;padding:6px 12px;font-size:13px;background:var(--sf);color:var(--mut)}
+.bg.on{background:#fbece5;border-color:#f0c7b6;color:var(--ad);font-weight:600}
+.list{background:var(--sf);border:1px solid var(--ln);border-radius:16px;overflow:hidden}
+.row{display:flex;align-items:center;gap:14px;padding:14px 16px;border:0;border-bottom:1px solid var(--ln);background:none;width:100%;text-align:left}
+.row:last-child{border-bottom:0}
+button.row:hover{background:var(--bg)}
+.row.lock{opacity:.55}
+.num{width:34px;height:34px;border-radius:50%;background:var(--sub);display:grid;place-items:center;font-size:13px;font-weight:600;flex:none}
+.num.ok{background:#e8f0e4;color:var(--ok)}
+.mid{flex:1;min-width:0}.tt{font-size:16px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lv{font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;display:inline-block}
+.easy{background:#e8f0e4;color:#3f6b3f}.med{background:#f8efd9;color:#8a6420}.big{background:#f9e4dc;color:#a4472f}.fin{background:var(--ac);color:#fff}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:16px;padding:clamp(18px,4vw,28px);margin-bottom:14px}
+.win{background:#fbece5;border-color:#f0c7b6;margin-bottom:16px}.win h3{font-size:20px;margin-bottom:4px}
+.card h2{font-size:clamp(26px,5vw,34px);line-height:1.2;margin:10px 0 8px}
+h4{font:600 12px system-ui;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin:22px 0 10px}
+.rl{margin-left:20px;display:flex;flex-direction:column;gap:8px;font-size:15px}.rl li::marker{color:var(--ac)}
+.rule{background:var(--sub);border-left:3px solid var(--ac);border-radius:8px;padding:12px 14px;font-size:14px;margin-top:20px}
+.pri{background:var(--ac);color:#fff;border:0;border-radius:12px;padding:14px;font-weight:600;font-size:15px;width:100%}
+.pri:hover{background:var(--ad)}.pri.undo{background:#e8f0e4;color:var(--ok)}
+.nav{display:flex;justify-content:space-between;margin-top:12px}.btn:disabled{opacity:.4;cursor:not-allowed}
+.ov{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:18px;z-index:50;overflow:auto}
+.ac{width:100%;max-width:400px;background:var(--sf);border:1px solid var(--ln);border-radius:20px;padding:30px 24px}
+.ac h2{text-align:center;font-size:26px}.ac>p{text-align:center;color:var(--mut);font-size:14px;margin:6px 0 20px}
+.f{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}.f label{font-size:12.5px;color:var(--mut);font-weight:600}
+.f input{background:var(--bg);border:1px solid var(--ln);padding:12px 14px;border-radius:12px;font-size:15px;outline:0;color:var(--tx)}
+.f input:focus{border-color:var(--ac)}
+.sw{text-align:center;margin-top:16px;font-size:13px;color:var(--mut)}.sw a{color:var(--ad);font-weight:600;cursor:pointer;text-decoration:underline}
+.toast{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--tx);color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;z-index:99;opacity:0;pointer-events:none;transition:.25s;max-width:90vw;text-align:center}
+.toast.on{opacity:1}
+@media(max-width:480px){.stat b{font-size:22px}.stat{padding:12px}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN / SIGNUP -->
+<div class="ov hide" id="auth">
+  <div class="ac">
+    <div class="spark" style="text-align:center;font-size:40px">✻</div>
+    <h2 id="aT">Welcome back</h2>
+    <p id="aS">Log in to continue your Core Java journey</p>
+    <form id="aF">
+      <div class="f" id="aNg" style="display:none"><label>Full Name</label><input id="aN" placeholder="Your name"></div>
+      <div class="f"><label>Email Address</label><input id="aE" type="email" required placeholder="name@example.com"></div>
+      <div class="f"><label>Password</label><input id="aP" type="password" required placeholder="••••••••"></div>
+      <button class="pri" id="aB">Log in</button>
+    </form>
+    <div class="sw"><span id="aW">Don't have an account?</span> <a id="aL">Sign up</a></div>
+  </div>
+</div>
+
+<div class="wrap hide" id="app">
+  <div class="top">
+    <div class="brand"><span class="spark">✻</span>Java Challenge</div>
+    <button class="btn" id="out">Log out</button>
+  </div>
+
+  <!-- SCREEN 1: HOME -->
+  <section id="home">
+    <h1 id="hi"></h1>
+    <p class="sm" style="font-size:15px;margin-top:6px">15 days. 15 programs. Pure Core Java. A new challenge unlocks every day.</p>
+    <div class="stats" id="stats"></div>
+    <div class="bar"><i id="pb"></i></div>
+    <div class="bd" id="bd"></div>
+    <div id="fin"></div>
+    <div class="list" id="list"></div>
+  </section>
+
+  <!-- SCREEN 2: QUESTION -->
+  <section id="task" class="hide"></section>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbynrCBMhXcWD8QVAvrfYE5idNthcjF6J_VCX0vKucxdK3fyixtXaSFWNg6RpWK2cfE7/exec";
+const RULE = "Use only Core Java. No Spring, JDBC, Android, GUI frameworks, APIs, databases or external libraries. Don't copy solutions — build it yourself.";
+const D = [
+["easy","Calculator","Create a console-based calculator that takes two numbers and an arithmetic operator from the user and performs the selected operation.","Take two numbers as input|Take an operator: + - * / %|Perform the operation and display the result|Handle division by zero|Display an error for an invalid operator|Use switch|Create separate methods for operations where appropriate"],
+["easy","Student Marks & Grade System","Accept the marks of a student in 5 subjects and calculate total marks, percentage, grade and result.","Take the student name|Take marks for 5 subjects (each between 0 and 100)|Calculate total marks and percentage|Grade: 90–100 A+, 80–89 A, 70–79 B, 60–69 C, 50–59 D, below 50 F|Below 35 in any subject = FAIL|Display a complete result"],
+["easy","Number Guessing Game","The computer randomly selects a number between 1 and 100 and the user has to guess it.","Generate a random number from 1–100 using the Random class|Ask for guesses and show Too Low / Too High|Display a success message when correct|Count the number of attempts|Allow the user to play again"],
+["med","ATM Simulator","Create a console-based ATM simulation. Starting balance: ₹10,000. Menu: 1 Check Balance, 2 Deposit, 3 Withdraw, 4 Change PIN, 5 Exit.","Ask for a PIN; allow max 3 incorrect attempts, then deny access|Check balance, deposit and withdraw money|Prevent withdrawal if balance is insufficient|Prevent negative or zero transactions|Allow the user to change the PIN|Keep showing the menu until the user selects Exit"],
+["med","Quiz Application","Create a console-based multiple-choice quiz containing 10 questions.","Create 10 MCQs, each with 4 options|Store questions and answers using arrays|1 mark for a correct answer, 0 for incorrect|Show whether each answer is correct or incorrect|Display total questions, correct answers, wrong answers, score and percentage"],
+["med","Student Management System","Store and manage multiple students (Roll Number, Name, Age, Class, Percentage). Menu: Add, Display All, Search, Update, Delete, Exit.","Create a Student class and store objects in an ArrayList|Roll numbers must be unique|Search students using roll number|Update student information and delete students|Display all students|Handle invalid student IDs properly"],
+["med","Expense Tracker","Build a personal expense tracker (ID, Description, Category, Amount, Date). Categories: Food, Travel, Education, Shopping, Other.","Store multiple expenses with a generated unique ID|Add, view all and delete an expense by ID|Search expenses by category|Calculate total expenses and find the highest expense|Use classes, objects, methods and ArrayList"],
+["med","Bank Account System","Manage multiple customer accounts (Account Number, Holder Name, Type, Balance).","Create accounts with unique account numbers|Deposit and withdraw money (block if balance is insufficient)|Check balance and display account details|Transfer money between two accounts|Search accounts by account number|Manage accounts with ArrayList using OOP principles"],
+["big","Library Management System","Build a complete console-based library system for a school (Books and Members).","Separate Book (ID, name, author, category, availability) and Member (ID, name, class) classes|Book IDs and Member IDs must be unique|Add, display and delete books; search by ID or name|Add members|Only available books can be issued; mark unavailable on issue and available on return|Display all currently issued books|Prevent invalid book/member operations; use ArrayList"],
+["big","Hospital Management System","Manage patients, doctors and appointments.","Separate Patient (ID, name, age, gender, disease), Doctor (ID, name, specialization) and Appointment (ID, patient ID, doctor ID, date) classes|IDs must be unique|Search patients and doctors by ID|Book an appointment only for an existing patient and doctor|Display and cancel appointments|Prevent invalid IDs; use ArrayList"],
+["big","Railway Reservation System","Build a console-based railway reservation system with trains and passengers.","Add and display multiple trains (number, name, source, destination, seats)|Search trains by number or destination|Book a ticket if seats are available and assign a seat number|Reduce available seats on booking, increase on cancellation|Generate a unique passenger/ticket ID and display ticket details|Prevent booking when full and cancelling an invalid ticket"],
+["big","Hotel Management System","Manage rooms, customers, bookings and bills.","Add rooms of different types (number, type, price per day, availability)|Display rooms and search available rooms|Register customers (ID, name, age, phone)|Book an available room and mark it unavailable|Calculate the bill by number of days plus optional extra charges|Free the room after check-out and generate a complete bill"],
+["big","Online Shopping System","Create a console-based online shopping application.","Add and manage products (ID, name, category, price, stock)|Search products and display them by category|Register customers (ID, name, email)|Add to cart, change quantity, remove and view cart|Check stock before adding to cart|Calculate subtotal and final bill|Reduce stock at checkout, generate an order ID and store order history"],
+["big","Banking Management System","Build a larger banking system with customers, accounts and transactions.","Register customers (ID, name, age, phone); one customer can have multiple accounts|Open and close accounts with unique IDs|Deposit, withdraw and transfer money|Maintain transaction history (ID, type, amount, date, account)|Search customers and display account details|Prevent invalid and insufficient-balance transactions|Use multiple classes, ArrayList and proper encapsulation"],
+["fin","Student Examination System","The final project: register students, take exams and receive results.","Register students with unique IDs; search students|Add and display multiple subjects|Add MCQ questions (4 options, correct answer, marks) to subjects|Start an exam: select student and subject, show questions one by one|Calculate marks, correct/wrong answers, percentage, grade and PASS/FAIL|Show a full result and student result history|Demonstrate as many Core Java concepts as possible: data types, operators, if-else, switch, loops, arrays, strings, methods, classes, constructors, encapsulation, inheritance, polymorphism, abstraction, interfaces, ArrayList, exception handling"]
+];
+const LV={easy:["Easy","easy",100],med:["Medium","med",150],big:["Big","big",250],fin:["Final Project","fin",500]};
+const $=id=>document.getElementById(id);
+const iso=d=>d.toLocaleDateString('en-CA'),today=()=>iso(new Date()),dt=s=>new Date(s+'T00:00:00');
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let U=JSON.parse(localStorage.getItem('j15_user')||'null'),P,signup=false,tt;
+
+/* ===== PROGRESS ===== */
+const pk=()=>'j15_p_'+U.email,save=()=>localStorage.setItem(pk(),JSON.stringify(P));
+function load(){P=Object.assign({start:today(),done:[],chk:{},dates:{},code:{},time:{}},JSON.parse(localStorage.getItem(pk())||'null')||{});save()}
+const unlocked=()=>Math.min(15,Math.round((dt(today())-dt(P.start))/864e5)+1);
+const unlockDate=n=>{const d=dt(P.start);d.setDate(d.getDate()+n-1);return d.toLocaleDateString('en-IN',{day:'numeric',month:'short'})};
+const xp=()=>P.done.reduce((s,n)=>s+LV[D[n-1][0]][2],0);
+function streak(){const s=new Set(Object.values(P.dates)),d=new Date();let c=0;if(!s.has(iso(d)))d.setDate(d.getDate()-1);while(s.has(iso(d))){c++;d.setDate(d.getDate()-1)}return c}
+const has=(a,b)=>{for(let i=a;i<=b;i++)if(!P.done.includes(i))return 0;return 1};
+const B=[["🌱","First Step",()=>P.done.length>0],["🟢","Easy Cleared",()=>has(1,3)],["🟡","Medium Master",()=>has(4,8)],["🔴","Big Builder",()=>has(9,14)],["🔥","3-Day Streak",()=>streak()>=3],["🏆","Java Champion",()=>P.done.length==15]];
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)}
+
+/* ===== AUTH (same Google Sheet backend) ===== */
+function mode(s){signup=s;$('aT').textContent=s?'Create your account':'Welcome back';$('aS').textContent=s?'Sign up to begin the 15-day challenge':'Log in to continue your Core Java journey';$('aNg').style.display=s?'flex':'none';$('aB').textContent=s?'Sign up':'Log in';$('aW').textContent=s?'Already have an account?':"Don't have an account?";$('aL').textContent=s?'Log in':'Sign up'}
+$('aL').onclick=()=>mode(!signup);
+$('aF').onsubmit=async e=>{
+  e.preventDefault();
+  const email=$('aE').value.trim().toLowerCase(),password=$('aP').value.trim(),name=$('aN').value.trim();
+  if(signup&&!name){alert('Please enter your full name.');return}
+  $('aB').disabled=true;$('aB').textContent='Connecting...';
+  try{await fetch(GOOGLE_SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:signup?'signup':'login',name,email,password,loginDate:new Date().toLocaleString('en-US',{timeZone:'Asia/Kolkata'})})})}catch(err){console.error(err)}
+  if(name)localStorage.setItem('j15_n_'+email,name);
+  U={name:name||localStorage.getItem('j15_n_'+email)||email.split('@')[0],email};
+  localStorage.setItem('j15_user',JSON.stringify(U));
+  $('aB').disabled=false;$('aB').textContent=signup?'Sign up':'Log in';start();
+};
+$('out').onclick=()=>{if(confirm('Are you sure you want to log out?')){localStorage.removeItem('j15_user');U=null;history.replaceState(null,'','#');$('app').classList.add('hide');$('auth').classList.remove('hide');mode(false)}};
+function start(){
+  load();$('auth').classList.add('hide');$('app').classList.remove('hide');
+  const h=location.hash;if(/^#day-\d+$/.test(h)){history.replaceState(null,'','#');history.pushState({t:1},'',h)}
+  route();
+}
+
+/* ===== SCREEN 1: HOME ===== */
+function home(){
+  const u=unlocked(),dn=P.done.length,x=xp(),h=new Date().getHours();
+  $('hi').textContent='✻ '+(h<12?'Good morning':h<18?'Good afternoon':'Good evening')+', '+U.name;
+  $('stats').innerHTML=[[streak(),'🔥 day streak'],[x.toLocaleString(),'⚡ XP · Level '+(1+Math.floor(x/500))],[dn+'/15','✅ completed']].map(s=>`<div class="stat"><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+  $('pb').style.width=Math.round(dn/15*100)+'%';
+  $('bd').innerHTML=B.map(b=>`<span class="bg ${b[2]()?'on':''}">${b[2]()?b[0]:'🔒'} ${b[1]}</span>`).join('');
+  $('fin').innerHTML=dn==15?`<div class="card win"><h3>🎉 Challenge complete!</h3><p>You built all 15 Core Java programs. Outstanding work, ${esc(U.name)}!</p></div>`:'';
+  $('list').innerHTML=D.map((d,i)=>{
+    const n=i+1,lv=LV[d[0]],ok=P.done.includes(n);
+    if(n>u)return `<div class="row lock"><span class="num">🔒</span><div class="mid"><div class="tt">Locked</div><div class="sm">Day ${n} · unlocks ${unlockDate(n)}</div></div></div>`;
+    return `<button class="row" onclick="nav('day-${n}')"><span class="num ${ok?'ok':''}">${ok?'✓':n}</span><div class="mid"><div class="tt">${d[1]}</div><div class="sm"><span class="lv ${lv[1]}">${lv[0]}</span> ${ok?'Completed':'Open'}</div></div><span class="sm">›</span></button>`;
+  }).join('');
+}
+
+/* ===== SCREEN 2: QUESTION ===== */
+function task(n){
+  const d=D[n-1],lv=LV[d[0]],dn=P.done.includes(n);
+  $('task').innerHTML=`
+  <button class="btn" onclick="back()">‹ All challenges</button>
+  <div class="card" style="margin-top:14px">
+    <span class="lv ${lv[1]}">${lv[0]}</span> <span class="sm">Day ${n} of 15 · +${lv[2]} XP</span>
+    <h2>${d[1]}</h2>
+    <h4>Problem</h4><p>${d[2]}</p>
+    <h4>Requirements</h4>
+    <ul class="rl">${d[3].split('|').map(r=>`<li>${r}</li>`).join('')}</ul>
+    <div class="rule"><b>Rule:</b> ${RULE}</div>
+  </div>
+  <button class="pri ${dn?'undo':''}" onclick="done(${n})">${dn?'✓ Completed — tap to undo':'Mark Day '+n+' as completed'}</button>
+  <div class="nav">
+    <button class="btn" ${n>1?`onclick="swap('day-${n-1}')"`:'disabled'}>‹ Previous</button>
+    <button class="btn" ${n<unlocked()?`onclick="swap('day-${n+1}')"`:'disabled'}>Next ›</button>
+  </div>`;
+}
+function done(n){
+  const before=B.map(b=>b[2]()),k=P.done.indexOf(n);
+  if(k>-1){P.done.splice(k,1);delete P.dates[n]}else{P.done.push(n);P.dates[n]=today()}
+  save();
+  const nb=B.filter((b,i)=>!before[i]&&b[2]()).map(b=>b[1]);
+  if(nb.length)toast('🏅 Badge unlocked: '+nb.join(', '));
+  if(k<0&&P.done.length==15){back();return}
+  task(n);
+}
+
+/* ===== ROUTER (mobile back button works between screens) ===== */
+const nav=h=>{history.pushState({t:1},'','#'+h);route()};
+const swap=h=>{history.replaceState(history.state,'','#'+h);route()};
+const back=()=>history.state&&history.state.t?history.back():(history.replaceState(null,'','#'),route());
+function route(){
+  if(!U)return;
+  const m=location.hash.match(/^#day-(\d+)$/),n=m?+m[1]:0;
+  if(n>=1&&n<=15&&n<=unlocked()){$('home').classList.add('hide');$('task').classList.remove('hide');task(n)}
+  else{if(n)history.replaceState(null,'','#');$('task').classList.add('hide');$('home').classList.remove('hide');home()}
+  window.scrollTo(0,0);
+}
+addEventListener('popstate',route);
+
+if(U){start()}else{$('auth').classList.remove('hide');mode(false)}
+</script>
+</body>
+</html>
